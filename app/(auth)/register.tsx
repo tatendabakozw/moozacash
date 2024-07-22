@@ -29,7 +29,7 @@ const Regsiter = (props: Props) => {
     setShowPassword(!show_password);
   };
 
-  const loginWithEmail = async () => {
+  const registerWithEmail = async () => {
     try {
       setLoading(true);
       // TODO - auth logic
@@ -101,7 +101,7 @@ const Regsiter = (props: Props) => {
           </View>
           <PrimaryButton
             text="Register"
-            onPress={loginWithEmail}
+            onPress={registerWithEmail}
             loading={loading}
             error={error}
           />
