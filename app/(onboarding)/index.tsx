@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 type Props = {};
 
-const Welcome = (props: Props) => {
+const OnBoarding = (props: Props) => {
   const inserts = useSafeAreaInsets();
   return (
     <View
@@ -17,11 +17,11 @@ const Welcome = (props: Props) => {
         },
       ]}
     >
-      <Text>Welcome</Text>
+      <Text>OnBoarding</Text>
     </View>
   );
 };
 
-export default Welcome;
+export default OnBoarding;
 
 const styles = StyleSheet.create({});
