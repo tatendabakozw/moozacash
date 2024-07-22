@@ -1,9 +1,10 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import tw from "twrnc";
 import Colors from "@/constants/Colors";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AbstractIllustration from "@/assets/svgs/AbstractIllustration";
+import { router } from "expo-router";
 
 type Props = {};
 
@@ -38,14 +39,16 @@ const Welcome = (props: Props) => {
         </Text>
         <View style={tw`h-4`} />
         <TouchableOpacity
+          onPress={() => router.push("register")}
           activeOpacity={0.7}
-          style={tw`bg-blue-600 w-full p-4 rounded-2xl`}
+          style={tw`bg-[${Colors.light.primary}] w-full p-4 rounded-2xl`}
         >
           <Text style={tw`text-center font-bold  text-white text-lg`}>
             Get Started
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => router.push("login")}
           activeOpacity={0.7}
           style={tw`bg-white border border-zinc-200/50 w-full p-4 rounded-2xl`}
         >
