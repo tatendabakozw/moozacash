@@ -10,6 +10,7 @@ import PrimaryButton from "@/components/buttons/PrimaryButton";
 import SecondaryButton from "@/components/buttons/SecondaryButton";
 import { renderPasswordIcon } from "@/utils/renderPasswordIcon";
 import OrDivider from "@/components/dividers/OrDivider";
+import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
 
 type Props = {};
 
@@ -43,15 +44,16 @@ const Regsiter = (props: Props) => {
   return (
     <View
       style={[
-        tw`bg-[${Colors.light.primary}] relative h-full items-center justify-center `,
+        tw`bg-white  border border-zinc-200/50 relative h-full items-center justify-center `,
         {
           paddingTop: inserts.top,
         },
       ]}
     >
+      <ExpoStatusBar style="dark" />
       <View style={tw`p-4 absolute  w-full z-50`}>
         <View
-          style={tw`bg-white  rounded-2xl shadow-sm border border-zinc-200/50 p-4 gap-6`}
+          style={tw`bg-white  border border-zinc-200/50 rounded-2xl p-4 gap-6`}
         >
           <Text
             style={tw`text-[${Colors.light.primary}] text-3xl font-bold text-center`}
@@ -109,13 +111,14 @@ const Regsiter = (props: Props) => {
           <SecondaryButton
             text="Login Instead"
             onPress={() => router.push("login")}
-            loading={loading}
-            error={error}
           />
         </View>
       </View>
       <View
-        style={tw`bg-zinc-100 rounded-t-3xl absolute z-10 bottom-0 w-full h-60`}
+        style={tw`bg-[${Colors.light.secondary}]/20 rounded-bl-full rounded-tl-full  absolute top-0 right-0 bottom-0 w-40 h-60`}
+      />
+      <View
+        style={tw`bg-zinc-50 rounded-t-3xl absolute z-10 bottom-0 w-full h-60`}
       />
     </View>
   );

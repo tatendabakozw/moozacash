@@ -5,6 +5,7 @@ import Colors from "@/constants/Colors";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import AbstractIllustration from "@/assets/svgs/AbstractIllustration";
 import { router } from "expo-router";
+import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
 
 type Props = {};
 
@@ -19,6 +20,7 @@ const Welcome = (props: Props) => {
         },
       ]}
     >
+      <ExpoStatusBar style="dark" />
       <View style={tw` rounded-full`}>
         <AbstractIllustration />
       </View>
