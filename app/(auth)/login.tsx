@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,Alert } from "react-native";
 import React, { useState } from "react";
 import tw from "twrnc";
 import Colors from "@/constants/Colors";
@@ -11,6 +11,8 @@ import SecondaryButton from "@/components/buttons/SecondaryButton";
 import { renderPasswordIcon } from "@/utils/renderPasswordIcon";
 import OrDivider from "@/components/dividers/OrDivider";
 import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
+import { isClerkAPIResponseError, useSignIn, useSignUp } from '@clerk/clerk-expo';
+import { BACKEND_API_GATEWAY_URL } from "@/constants/Application";
 
 type Props = {};
 
@@ -22,20 +24,55 @@ const Logiin = (props: Props) => {
   const [username, setUsername] = useState("");
   const [error, setError] = useState(false);
   const [isSelected, setSelection] = useState(false);
+  const { signIn } = useSignIn();
+  const { signUp, setActive } = useSignUp();
 
   const toggleShowPassword = () => {
     setShowPassword(!show_password);
   };
 
-  const registerWithEmail = async () => {
+  const signInWithUsername = async () => {
+    
     try {
       setLoading(true);
-      // TODO - auth logic
-      router.push("(tabs)");
-      setLoading(false);
-    } catch (error) {
+      const { createdSessionId } = await signIn!.create({
+        identifier: username,
+        password,
+      });
+
+      if (createdSessionId) {
+        // Obtain a JWT token from your Spring Boot backend
+        const response = await fetch(`${BACKEND_API_GATEWAY_URL}api/v1/token/fetch/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+          }),
+        });
+        const data = await response.text();
+
+        if (response.ok) {
+          Alert.alert('Login Successful', `JWT Token: ${data}`);
+          await setActive!({ session: signIn!.createdSessionId });
+          // router.push("(tabs)");
+          setLoading(false);
+          // Save the token to secure store or use it as needed
+        } else {
+          Alert.alert('Login Failed', data);
+        }
+      } else {
+        Alert.alert('Login requires additional steps');
+      }
+    } catch (err) {
+      console.log('error', JSON.stringify(err, null, 2));
       setError(true);
       setLoading(false);
+      if (isClerkAPIResponseError(err)) {
+        Alert.alert('Error', err.errors[0].message);
+      }
     }
   };
   return (
@@ -83,7 +120,7 @@ const Logiin = (props: Props) => {
           </View>
           <PrimaryButton
             text="Log In"
-            onPress={registerWithEmail}
+            onPress={signInWithUsername}
             loading={loading}
             error={error}
           />
