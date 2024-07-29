@@ -13,7 +13,7 @@ function TabBarIcon(props: {
   color: string;
 }) {
   // @ts-ignore
-  return <Feather size={28} style={{ marginBottom: 3 }} {...props} />;
+  return <Feather size={20} style={{ marginBottom: 3 }} {...props} />;
 }
 
 export default function TabLayout() {
@@ -44,7 +44,7 @@ export default function TabLayout() {
           return (
             <Text
               style={{
-                fontSize: 13,
+                fontSize: 11,
                 paddingBottom: 10,
                 color: focused ? Colors.light.primary : "#334155",
                 fontWeight: "bold",
@@ -61,7 +61,7 @@ export default function TabLayout() {
         header: (props) => <NavBar {...props} route={route} />,
         tabBarStyle: {
           paddingVertical: Platform.OS === "ios" ? 15 : 10,
-          height: 70,
+          height: 60,
           backgroundColor: "#fff",
           borderTopWidth: 0,
           borderColor: "#f4f4f5",

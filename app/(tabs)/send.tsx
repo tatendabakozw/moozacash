@@ -2,6 +2,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React, { useState } from "react";
 import tw from "twrnc";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
+import TransactionContainer from "@/components/transactions/transactions-container/TransactionContainer";
 
 const Send = () => {
   const [amount, setAmount] = useState(0);
@@ -44,6 +45,7 @@ const Send = () => {
           <Text style={tw`text-slate-700`}>Transactions</Text>
           <Feather name="chevron-right" size={16} color="#334155" />
         </View>
+        <TransactionContainer />
       </View>
     </View>
   );
