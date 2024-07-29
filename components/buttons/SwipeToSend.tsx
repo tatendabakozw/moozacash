@@ -28,15 +28,6 @@ const SwipeToSend: React.FC = () => {
     }
   }, []);
 
-  //   const startTimer = useCallback(() => {
-  //     if (timerRef.current === null) {
-  //       timerRef.current = setTimeout(() => {
-  //         handleSendAction();
-  //         timerRef.current = null;
-  //       }, 2000);
-  //     }
-  //   }, [handleSendAction]);
-
   const resetTrigger = useCallback(() => {
     hasTriggered.current = false;
   }, []);
