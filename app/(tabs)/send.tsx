@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import tw from "twrnc";
 import { Feather, MaterialIcons } from "@expo/vector-icons";
 import TransactionContainer from "@/components/transactions/transactions-container/TransactionContainer";
+import { router } from "expo-router";
 
 const Send = () => {
   const [amount, setAmount] = useState(0);
@@ -16,6 +17,7 @@ const Send = () => {
 
         <View style={tw`flex-row w-full gap-2 px-8`}>
           <TouchableOpacity
+            onPress={() => router.push("modal-send-money")}
             activeOpacity={0.8}
             style={tw`bg-slate-950 gap-2 items-center justify-center flex-row items-center px-2 py-4 rounded-xl flex-1`}
           >

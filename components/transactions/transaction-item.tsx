@@ -15,7 +15,9 @@ const TransactionItem = (props: Props) => {
       <View
         style={tw`flex flex-row items-center h-12 w-12 rounded-lg bg-emerald-200 content-center justify-center`}
       >
-        <Text style={tw`text-slate-950 font-bold text-lg`}>T</Text>
+        <Text style={tw`text-slate-950 font-bold text-lg`}>
+          {props.name[0]}
+        </Text>
       </View>
       <View style={tw`flex-1 gap-1`}>
         <Text style={tw`text-slate-950 font-bold`}>{props.name}</Text>
