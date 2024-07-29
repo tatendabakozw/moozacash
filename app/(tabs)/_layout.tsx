@@ -4,6 +4,8 @@ import { Tabs } from "expo-router";
 import Colors from "@/constants/Colors";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import { Feather } from "@expo/vector-icons";
+import NavBar from "@/components/navigation/NavBar";
+import { Platform, Text } from "react-native";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -17,12 +19,60 @@ function TabBarIcon(props: {
 export default function TabLayout() {
   return (
     <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors["light"].tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
+      screenOptions={({ route }) => ({
+        tabBarLabel: ({ focused }) => {
+          let label;
+          switch (route.name) {
+            case "send":
+              label = "Send";
+              break;
+            case "receive":
+              label = "Cashout";
+              break;
+            case "analytics":
+              label = "Analytics";
+              break;
+            case "profile":
+              label = "Profile";
+              break;
+
+            default:
+              label = "Send";
+              break;
+          }
+
+          return (
+            <Text
+              style={{
+                fontSize: 13,
+                paddingBottom: 10,
+                color: focused ? Colors.light.primary : "#334155",
+                fontWeight: "bold",
+              }}
+            >
+              {label}
+            </Text>
+          );
+        },
+        tabBarActiveTintColor: Colors.light.primary,
+        tabBarInactiveTintColor: "#334155",
+
         headerShown: useClientOnlyValue(false, true),
-      }}
+        header: (props) => <NavBar {...props} route={route} />,
+        tabBarStyle: {
+          paddingVertical: Platform.OS === "ios" ? 15 : 10,
+          height: 70,
+          backgroundColor: "#fff",
+          borderTopWidth: 0,
+          borderColor: "#f4f4f5",
+          elevation: 5,
+          shadowColor: "#000",
+          shadowOffset: { width: 1, height: -2 },
+          shadowOpacity: 0.5,
+          shadowRadius: 10,
+        },
+        tabBarShowLabel: true,
+      })}
     >
       <Tabs.Screen
         name="send"
@@ -34,7 +84,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="receive"
         options={{
-          title: "Receive",
+          title: "Cashout",
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="download" color={color} />
           ),

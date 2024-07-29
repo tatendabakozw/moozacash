@@ -59,7 +59,7 @@ const Logiin = (props: Props) => {
       //   Alert.alert("Login Failed");
       // }
 
-      router.push("(tabs)");
+      router.push("(tabs)/send");
     } catch (err) {
       console.log("error", JSON.stringify(err, null, 2));
       setError(true);
